@@ -23,8 +23,6 @@ extension Target.Dependency {
     static var urlRouting: Self { .product(name: "URLRouting", package: "swift-url-routing") }
     static var urlRoutingTranslating: Self { .product(name: "URLRoutingTranslating", package: "swift-url-routing-translating") }
     static var urlFormCoding: Self { .product(name: "URLFormCoding", package: "swift-url-form-coding") }
-    static var urlFormCodingURLRouting: Self { .product(name: "URLFormCodingURLRouting", package: "swift-url-form-coding-url-routing") }
-    static var urlMultipartFormCodingURLRouting: Self { .product(name: "URLMultipartFormCodingURLRouting", package: "swift-url-multipart-form-coding-url-routing") }
     static var dateParsing: Self { .product(name: "DateParsing", package: "swift-date-parsing") }
     static var unixEpochParsing: Self { .product(name: "UnixEpochParsing", package: "swift-date-parsing") }
 }
@@ -50,10 +48,8 @@ let package = Package(
         .package(url: "https://github.com/coenttb/swift-emailaddress-type", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-foundation-extensions", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-url-form-coding", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-url-form-coding-url-routing", from: "0.0.1"),
+        .package(url: "https://github.com/coenttb/swift-url-form-coding", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-url-routing-translating", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-url-multipart-form-coding-url-routing", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.5.6"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
         .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.4.3"),
@@ -75,9 +71,7 @@ let package = Package(
                 .domain,
                 .dateParsing,
                 .unixEpochParsing,
-                .urlFormCoding,
-                .urlFormCodingURLRouting,
-                .urlMultipartFormCodingURLRouting
+                .urlFormCoding
             ]
         ),
         .testTarget(

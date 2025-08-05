@@ -1,48 +1,30 @@
-# swift-server-foundation: Server Development Foundation for Swift
+# swift-types-foundation: Type-Safe Foundation for Swift
 
-`swift-server-foundation` is a comprehensive server-side Swift library that consolidates essential packages for building robust, scalable server applications. Rather than managing multiple dependencies, this foundation provides unified access to authentication, database connectivity, rate limiting, logging, routing, and server infrastructure tools.
+`swift-types-foundation` is a Swift library that bundles essential type-safe packages for domain modeling and data handling. It provides a single dependency for libraries that need to declare strongly-typed models, such as `swift-html-types` and similar type-focused packages.
 
 ## Included Libraries
 
-This foundation re-exports the following specialized packages, organized by domain:
+This foundation consolidates type-safe packages that are commonly used for domain modeling:
 
-### **Type Safety & Domain Modeling**
+### **Core Type-Safe Models**
 
 - **[EmailAddress](https://github.com/coenttb/swift-emailaddress-type)** - Domain-accurate and type-safe email address handling that adheres to web standards
 - **[Domain](https://github.com/coenttb/swift-domain-type)** - Type-safe domain model consistent with web standards for reliable domain handling
-- **[JWT](https://github.com/coenttb/swift-jwt)** - Standards-compliant JSON Web Token creation, signing, and verification using Apple's Crypto framework
-- **[PasswordValidation](https://github.com/coenttb/swift-password-validation)** - Robust password validation with customizable security policies
 
-### **Authentication & Security**
-
-- **[Crypto](https://github.com/apple/swift-crypto)** - Apple's Swift Crypto framework for cryptographic operations, hashing, and secure key management
-- **[RateLimiter](https://github.com/coenttb/swift-ratelimiter)** - Flexible rate limiting implementation to protect APIs from abuse and ensure fair usage
-
-### **Database & Persistence**
-
-- **[PostgresKit](https://github.com/vapor/postgres-kit)** - PostgreSQL database driver with async/await support for reliable data persistence
-- **Database Configuration** - Built-in utilities for managing database connections and configurations
-
-### **Server Infrastructure**
-
-- **[AsyncHTTPClient](https://github.com/swift-server/async-http-client)** - Non-blocking HTTP client built on SwiftNIO for making external API calls
-- **[Logging](https://github.com/apple/swift-log)** - Apple's unified logging API for structured, configurable application logging
-- **Event Loop Management** - Connection pooling and event loop group utilities for optimal performance
-
-### **Environment & Configuration**
-
-- **[EnvironmentVariables](https://github.com/coenttb/swift-environment-variables)** - Type-safe environment variable handling with validation and defaults
-- **Environment Variables Test Support** - Testing utilities for environment-dependent code
-
-### **Date & Time Handling**
+### **Date & Time Types**
 
 - **[DateParsing](https://github.com/coenttb/swift-date-parsing)** - Comprehensive date parsing for RFC 2822, RFC 5322, and Unix epoch timestamps with robust error handling
+- **[UnixEpochParsing](https://github.com/coenttb/swift-date-parsing)** - Unix epoch timestamp parsing utilities
 - **[FoundationExtensions](https://github.com/coenttb/swift-foundation-extensions)** - Powerful extensions for date manipulation, validation, and formatting with intuitive operations like `date + 1.day`
 
-### **Routing & Translation**
+### **URL & Form Types**
 
 - **[URLRouting](https://github.com/pointfreeco/swift-url-routing)** - Point-Free's powerful URL routing library for type-safe navigation
 - **[URLRoutingTranslating](https://github.com/coenttb/swift-url-routing-translating)** - Internationalization support for routing with multi-language URL patterns
+- **[URLFormCoding](https://github.com/coenttb/swift-url-form-coding)** - Type-safe URL form encoding and decoding
+
+### **Language & Localization Types**
+
 - **[Translating](https://github.com/coenttb/swift-translating)** - Comprehensive translation and localization framework
 
 ### **Utilities & Infrastructure**
@@ -57,61 +39,64 @@ This foundation re-exports the following specialized packages, organized by doma
 Instead of importing multiple individual packages:
 
 ```swift
-import AsyncHTTPClient
-import PostgresKit
-import JWT
-import RateLimiter
-import Logging
-import EnvironmentVariables
+import EmailAddress
+import Domain
+import DateParsing
+import URLRouting
+import Translating
+import Builders
 // ... and many more
 ```
 
 Simply import the foundation:
 
 ```swift
-import ServerFoundation
+import TypesFoundation
 
-// All server functionality is now available:
-let logger = Logger(label: "com.example.app")
-let jwt = try JWT.signed(/* ... */)
-let client = HTTPClient(eventLoopGroupProvider: .shared)
-let rateLimiter = RateLimiter(rate: 100, per: .minute)
-let dbConfig = try DatabaseConfiguration.live
+// All type-safe functionality is now available:
+let email = try EmailAddress("user@example.com")
+let domain = try Domain("example.com")
+let date = Date.now + 1.day
+let route = URLRoute<MyRoute>()
 ```
 
 ## Installation
 
-To use **swift-server-foundation** in your project, add it to your `Package.swift` dependencies:
+To use **swift-types-foundation** in your project, add it to your `Package.swift` dependencies:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/coenttb/swift-server-foundation.git", exact: "0.0.1")
+    .package(url: "https://github.com/coenttb/swift-types-foundation.git", from: "0.0.1")
 ]
 ```
 
-## Environment Variables Support
-
-The package includes `ServerFoundationEnvVars` for environment-specific configuration:
+Then add it to your target dependencies:
 
 ```swift
-import ServerFoundationEnvVars
-
-// Access environment variables with type safety
-let port = EnvVars.PORT.value ?? 8080
-let databaseUrl = EnvVars.DATABASE_URL.require()
+.target(
+    name: "YourTarget",
+    dependencies: [
+        .product(name: "TypesFoundation", package: "swift-types-foundation")
+    ]
+)
 ```
 
-## Related projects
+## Related Projects
 
-### Boiler & coenttb
+### Type-Focused Libraries Using This Foundation
 
-* [boiler](https://www.github.com/coenttb/boiler): A minimal Swift web framework for building type-safe servers
-* [swift-web-foundation](https://www.github.com/coenttb/swift-web-foundation): Web development foundation library with HTML, CSS, and form handling
-* [coenttb-com-server](https://www.github.com/coenttb/coenttb-com-server): The backend server for coenttb.com, written entirely in Swift and powered by this foundation
+- **[swift-mailgun-types](https://github.com/coenttb/swift-mailgun-types)**: A complete Swift domain model of Mailgun types, Client, and Router
+- **[swift-html-types](https://github.com/coenttb/swift-html-types)**: A complete Swift domain model of HTML elements and attributes
+- **[swift-css-types](https://github.com/coenttb/swift-css-types)**: A complete Swift domain model of CSS properties and types
+
+### Other Foundation Libraries
+
+- **[swift-server-foundation](https://github.com/coenttb/swift-server-foundation)**: Server development foundation for building robust, scalable server applications
+- **[swift-web-foundation](https://www.github.com/coenttb/swift-web-foundation)**: Web development foundation library with HTML, CSS, and form handling
 
 ## Feedback is Much Appreciated!
   
-If you're working on your own Swift server project, feel free to learn, fork, and contribute.
+If you're working on your own Swift type-safe project, feel free to learn, fork, and contribute.
 
 Got thoughts? Found something you love? Something you hate? Let me know! Your feedback helps make this project better for everyone. Open an issue or start a discussion—I'm all ears.
 
