@@ -18,3 +18,22 @@
 @_exported import URLRouting
 @_exported import URLRoutingTranslating
 @_exported import URLFormCoding
+@_exported import Tagged
+
+extension Tagged where RawValue == Int {
+    public static func parser() -> some ParserPrinter<Substring.UTF8View, Self> {
+        Digits().map(.convert(
+            apply: { Self.init(rawValue: $0) },
+            unapply: { $0.rawValue }
+        ))
+    }
+}
+
+extension Tagged where RawValue == UUID {
+    public static func parser() -> some ParserPrinter<Substring.UTF8View, Self> {
+        UUID.parser().map(.convert(
+            apply: { Self.init(rawValue: $0) },
+            unapply: { $0.rawValue }
+        ))
+    }
+}

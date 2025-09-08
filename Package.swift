@@ -25,6 +25,7 @@ extension Target.Dependency {
     static var urlFormCoding: Self { .product(name: "URLFormCoding", package: "swift-url-form-coding") }
     static var dateParsing: Self { .product(name: "DateParsing", package: "swift-date-parsing") }
     static var unixEpochParsing: Self { .product(name: "UnixEpochParsing", package: "swift-date-parsing") }
+    static var tagged: Self { .product(name: "Tagged", package: "swift-tagged") }
 }
 
 let package = Package(
@@ -54,6 +55,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
         .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.4.3"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.2"),
+        .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.9.0"),
     ],
     targets: [
         .target(
@@ -71,7 +73,8 @@ let package = Package(
                 .domain,
                 .dateParsing,
                 .unixEpochParsing,
-                .urlFormCoding
+                .urlFormCoding,
+                .tagged
             ]
         ),
         .testTarget(
