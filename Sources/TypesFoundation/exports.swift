@@ -65,3 +65,14 @@ extension AnyParserPrinter: @unchecked @retroactive Sendable where Input: Sendab
 /// - Note: This conformance enables Path to be used safely in concurrent URL routing contexts
 /// while acknowledging that full verification requires runtime checks.
 extension Path: @unchecked @retroactive Sendable where Input: Sendable, Output: Sendable {}
+
+extension ParserPrinter where Input == URLRequestData {
+    /// Transforms the URLRequestData with a provided transformation function
+    /// - Parameter transform: Function that takes inout URLRequestData and returns modified URLRequestData
+    /// - Returns: Modified BaseURLPrinter
+    public func transform(_ transform: @escaping (inout URLRequestData) -> URLRequestData) -> BaseURLPrinter<Self> {
+        var requestData = URLRequestData()
+        requestData = transform(&requestData)
+        return self.baseRequestData(requestData)
+    }
+}
