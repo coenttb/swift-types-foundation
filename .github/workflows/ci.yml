@@ -13,10 +13,10 @@ concurrency:
 jobs:
   macos-swift60:
     name: macOS (Swift 6.0)
-    runs-on: macos-15
+    runs-on: macos-26
     strategy:
       matrix:
-        xcode: ['16.0']
+        xcode: ['26.0']
         config: ['debug', 'release']
     steps:
       - uses: actions/checkout@v5
@@ -43,10 +43,10 @@ jobs:
 
   macos-swift62:
     name: macOS (Swift 6.2)
-    runs-on: macos-15
+    runs-on: macos-26
     strategy:
       matrix:
-        xcode: ['16.2']
+        xcode: ['26.0']
         config: ['debug', 'release']
     steps:
       - uses: actions/checkout@v5
@@ -99,7 +99,7 @@ jobs:
 
   readme-validation:
     name: README Validation
-    runs-on: macos-15
+    runs-on: macos-26
     steps:
       - uses: actions/checkout@v5
 
