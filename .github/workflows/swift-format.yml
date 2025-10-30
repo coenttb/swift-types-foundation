@@ -1,0 +1,38 @@
+name: Swift Format
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  swift-format:
+    name: Auto-format Swift code
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.0.app
+
+      - name: Install swift-format
+        run: |
+          brew install swift-format
+
+      - name: Run swift-format
+        run: |
+          swift-format format --in-place --recursive \
+            Sources/ Tests/
+
+      - name: Commit changes
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git add -A
+            git commit -m "style: Auto-format code with swift-format"
+            git push
+          else
+            echo "No formatting changes needed"
+          fi
