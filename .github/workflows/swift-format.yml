@@ -2,34 +2,48 @@ name: Swift Format
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+
+concurrency:
+  group: format-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  swift-format:
-    name: Auto-format Swift code
+  swift_format:
+    name: swift-format
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v5
+
+      - name: Setup Swift
+        uses: swift-actions/setup-swift@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          swift-version: '6.0'
+
+      - name: Cache swift-format
+        id: cache-swift-format
+        uses: actions/cache@v4
+        with:
+          path: /usr/local/bin/swift-format
+          key: ${{ runner.os }}-swift-format-${{ hashFiles('.github/workflows/swift-format.yml') }}
 
       - name: Install swift-format
+        if: steps.cache-swift-format.outputs.cache-hit != 'true'
         run: |
-          brew install swift-format
+          git clone --depth 1 --branch main https://github.com/apple/swift-format.git
+          cd swift-format
+          swift build -c release
+          sudo cp .build/release/swift-format /usr/local/bin/
+          cd ..
+          rm -rf swift-format
 
-      - name: Run swift-format
-        run: |
-          swift-format format --in-place --recursive \
-            Sources/ Tests/
+      - name: Format
+        run: swift-format format --recursive --in-place Sources Tests
 
-      - name: Commit changes
-        run: |
-          if [[ -n $(git status --porcelain) ]]; then
-            git config --local user.email "github-actions[bot]@users.noreply.github.com"
-            git config --local user.name "github-actions[bot]"
-            git add -A
-            git commit -m "style: Auto-format code with swift-format"
-            git push
-          else
-            echo "No formatting changes needed"
-          fi
+      - uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: Run swift-format
+          branch: 'main'
