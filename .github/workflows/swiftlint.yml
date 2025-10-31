@@ -9,15 +9,16 @@ on:
 jobs:
   swiftlint:
     name: SwiftLint
-    runs-on: macos-15
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
 
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.0.app
-
       - name: Install SwiftLint
-        run: brew install swiftlint
+        run: |
+          curl -fsSL https://github.com/realm/SwiftLint/releases/latest/download/swiftlint_linux.zip -o swiftlint.zip
+          unzip swiftlint.zip
+          sudo mv swiftlint /usr/local/bin/
+          chmod +x /usr/local/bin/swiftlint
 
       - name: Run SwiftLint
         run: swiftlint lint --strict
