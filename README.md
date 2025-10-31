@@ -103,11 +103,33 @@ let route = URLRoute<MyRoute>()
 
 ## Related Packages
 
-### Type-Focused Libraries Using This Foundation
+### Dependencies
 
-- **[swift-mailgun-types](https://github.com/coenttb/swift-mailgun-types)**: A Swift package with foundational types for Mailgun.
-- **[swift-html-types](https://github.com/coenttb/swift-html-types)**: A Swift package with foundational types for HTML.
-- **[swift-css-types](https://github.com/coenttb/swift-css-types)**: A Swift package with foundational types for CSS.
+- [swift-builders](https://github.com/coenttb/swift-builders): A Swift package with result builders for Array, Dictionary, Set, String, and Markdown.
+- [swift-date-parsing](https://github.com/coenttb/swift-date-parsing): A Swift package for parsing RFC 2822, RFC 5322, and Unix timestamp formats.
+- [swift-domain-type](https://github.com/coenttb/swift-domain-type): A Swift package with a type-safe Domain model.
+- [swift-emailaddress-type](https://github.com/coenttb/swift-emailaddress-type): A Swift package with a type-safe EmailAddress model.
+- [swift-foundation-extensions](https://github.com/coenttb/swift-foundation-extensions): A Swift package with extensions for dates, times, and date components.
+- [swift-translating](https://github.com/coenttb/swift-translating): A Swift package for inline translations.
+- [swift-url-form-coding](https://github.com/coenttb/swift-url-form-coding): A Swift package for type-safe web form encoding and decoding.
+- [swift-url-routing-translating](https://github.com/coenttb/swift-url-routing-translating): A Swift package integrating multilingual support with URL routing.
+
+### Used By
+
+- [swift-document-templates](https://github.com/coenttb/swift-document-templates): A Swift package for data-driven business document creation.
+- [swift-github-types](https://github.com/coenttb/swift-github-types): A Swift package with foundational types for GitHub.
+- [swift-identities-types](https://github.com/coenttb/swift-identities-types): A Swift package with foundational types for authentication.
+- [swift-mailgun-types](https://github.com/coenttb/swift-mailgun-types): A Swift package with foundational types for Mailgun.
+- [swift-server-foundation](https://github.com/coenttb/swift-server-foundation): A Swift package with tools to simplify server development.
+- [swift-stripe-types](https://github.com/coenttb/swift-stripe-types): A Swift package with foundational types for Stripe.
+
+### Third-Party Dependencies
+
+- [pointfreeco/swift-case-paths](https://github.com/pointfreeco/swift-case-paths): Case paths bring the benefits of key paths to enums.
+- [pointfreeco/swift-dependencies](https://github.com/pointfreeco/swift-dependencies): A dependency management library for controlling dependencies in Swift.
+- [pointfreeco/swift-tagged](https://github.com/pointfreeco/swift-tagged): A wrapper type for safer, expressive code.
+- [pointfreeco/swift-url-routing](https://github.com/pointfreeco/swift-url-routing): A bidirectional URL router with more type safety and less fuss.
+- [pointfreeco/xctest-dynamic-overlay](https://github.com/pointfreeco/xctest-dynamic-overlay): Define XCTest assertion helpers directly in production code.
 
 ## Requirements
 
