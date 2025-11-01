@@ -20,6 +20,10 @@
 @_exported import URLRouting
 @_exported import URLRoutingTranslating
 
+#if canImport(FoundationNetworking)
+@_exported import FoundationNetworking
+#endif
+
 extension Tagged where RawValue == Int {
   public static func parser() -> some ParserPrinter<Substring.UTF8View, Self> {
     Digits().map(
