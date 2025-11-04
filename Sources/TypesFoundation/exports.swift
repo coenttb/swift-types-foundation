@@ -21,7 +21,7 @@
 @_exported import URLRoutingTranslating
 
 #if canImport(FoundationNetworking)
-@_exported import FoundationNetworking
+  @_exported import FoundationNetworking
 #endif
 
 extension Tagged where RawValue == Int {
