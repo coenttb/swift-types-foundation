@@ -28,7 +28,7 @@ extension Tagged where RawValue == Int {
     public static func parser() -> some ParserPrinter<Substring.UTF8View, Self> {
         Digits().map(
             .convert(
-                apply: { Self.init(rawValue: $0) },
+                apply: { Self(rawValue: $0) },
                 unapply: { $0.rawValue }
             )
         )
@@ -39,7 +39,7 @@ extension Tagged where RawValue == UUID {
     public static func parser() -> some ParserPrinter<Substring.UTF8View, Self> {
         UUID.parser().map(
             .convert(
-                apply: { Self.init(rawValue: $0) },
+                apply: { Self(rawValue: $0) },
                 unapply: { $0.rawValue }
             )
         )

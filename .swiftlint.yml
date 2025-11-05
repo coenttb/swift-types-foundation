@@ -15,7 +15,6 @@ opt_in_rules:
   - operator_usage_whitespace
   - private_outlet
   - redundant_nil_coalescing
-  - unused_capture_list
   - empty_string
   - explicit_enum_raw_value
   - literal_expression_end_indentation

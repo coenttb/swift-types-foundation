@@ -55,7 +55,10 @@ struct ReadmeVerificationTests {
             $0.calendar = Calendar.current
         } operation: {
             let date = Date.now + 1.day
-            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date.now)!
+            guard let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date.now) else {
+                Issue.record("Failed to calculate tomorrow's date")
+                return
+            }
 
             // Verify the date is approximately correct (within 1 second)
             let difference = abs(date.timeIntervalSince(tomorrow))

@@ -38,9 +38,9 @@ let package = Package(
         .library(
             name: .swiftTypesFoundation,
             targets: [
-                .swiftTypesFoundation,
+                .swiftTypesFoundation
             ]
-        ),
+        )
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
@@ -55,7 +55,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
         .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.4.3"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.2"),
-        .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.9.0"),
+        .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.9.0")
     ],
     targets: [
         .target(
@@ -83,7 +83,7 @@ let package = Package(
                 .swiftTypesFoundation,
                 .dependenciesTestSupport
             ]
-        ),
+        )
     ],
     swiftLanguageModes: [.v6]
 )
