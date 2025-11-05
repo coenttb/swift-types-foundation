@@ -21,29 +21,29 @@
 @_exported import URLRoutingTranslating
 
 #if canImport(FoundationNetworking)
-  @_exported import FoundationNetworking
+    @_exported import FoundationNetworking
 #endif
 
 extension Tagged where RawValue == Int {
-  public static func parser() -> some ParserPrinter<Substring.UTF8View, Self> {
-    Digits().map(
-      .convert(
-        apply: { Self.init(rawValue: $0) },
-        unapply: { $0.rawValue }
-      )
-    )
-  }
+    public static func parser() -> some ParserPrinter<Substring.UTF8View, Self> {
+        Digits().map(
+            .convert(
+                apply: { Self.init(rawValue: $0) },
+                unapply: { $0.rawValue }
+            )
+        )
+    }
 }
 
 extension Tagged where RawValue == UUID {
-  public static func parser() -> some ParserPrinter<Substring.UTF8View, Self> {
-    UUID.parser().map(
-      .convert(
-        apply: { Self.init(rawValue: $0) },
-        unapply: { $0.rawValue }
-      )
-    )
-  }
+    public static func parser() -> some ParserPrinter<Substring.UTF8View, Self> {
+        UUID.parser().map(
+            .convert(
+                apply: { Self.init(rawValue: $0) },
+                unapply: { $0.rawValue }
+            )
+        )
+    }
 }
 
 /// Retroactively conforms URLRequestData to the Sendable protocol.
@@ -76,14 +76,14 @@ where Input: Sendable, Output: Sendable {}
 extension Path: @unchecked @retroactive Sendable where Input: Sendable, Output: Sendable {}
 
 extension ParserPrinter where Input == URLRequestData {
-  /// Transforms the URLRequestData with a provided transformation function
-  /// - Parameter transform: Function that takes inout URLRequestData and returns modified URLRequestData
-  /// - Returns: Modified BaseURLPrinter
-  public func transform(
-    _ transform: @escaping (inout URLRequestData) -> URLRequestData
-  ) -> BaseURLPrinter<Self> {
-    var requestData = URLRequestData()
-    requestData = transform(&requestData)
-    return self.baseRequestData(requestData)
-  }
+    /// Transforms the URLRequestData with a provided transformation function
+    /// - Parameter transform: Function that takes inout URLRequestData and returns modified URLRequestData
+    /// - Returns: Modified BaseURLPrinter
+    public func transform(
+        _ transform: @escaping (inout URLRequestData) -> URLRequestData
+    ) -> BaseURLPrinter<Self> {
+        var requestData = URLRequestData()
+        requestData = transform(&requestData)
+        return self.baseRequestData(requestData)
+    }
 }
