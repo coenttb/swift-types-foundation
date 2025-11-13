@@ -18,7 +18,7 @@
 @_exported import Translating
 @_exported import URLFormCoding
 
-#if !compiler(>=6.1) || URLRouting
+#if URLRouting
     @_exported import URLRouting
     @_exported import URLRoutingTranslating
 
