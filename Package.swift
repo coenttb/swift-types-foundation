@@ -1,4 +1,4 @@
-// swift-tools-version:6.0
+// swift-tools-version:6.1
 
 import PackageDescription
 
@@ -22,7 +22,12 @@ extension Target.Dependency {
     static var issueReporting: Self { .product(name: "IssueReporting", package: "xctest-dynamic-overlay") }
     static var urlRouting: Self { .product(name: "URLRouting", package: "swift-url-routing") }
     static var urlRoutingTranslating: Self { .product(name: "URLRoutingTranslating", package: "swift-url-routing-translating") }
-    static var urlFormCoding: Self { .product(name: "URLFormCoding", package: "swift-url-form-coding") }
+    static var formCoding: Self {
+        .product(
+            name: "FormCoding",
+            package: "swift-form-coding"
+        )
+    }
     static var dateParsing: Self { .product(name: "DateParsing", package: "swift-date-parsing") }
     static var unixEpochParsing: Self { .product(name: "UnixEpochParsing", package: "swift-date-parsing") }
     static var tagged: Self { .product(name: "Tagged", package: "swift-tagged") }
@@ -42,6 +47,12 @@ let package = Package(
             ]
         )
     ],
+    traits: [
+        .trait(
+            name: "URLRouting",
+            description: "URLRouting integration for TypesFoundation"
+        )
+    ],
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-date-parsing", from: "0.1.0"),
@@ -49,7 +60,11 @@ let package = Package(
         .package(url: "https://github.com/swift-standards/swift-emailaddress-type", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-foundation-extensions", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-url-form-coding", from: "0.1.0"),
+        .package(
+            url: "https://github.com/coenttb/swift-form-coding",
+            from: "0.1.0",
+            traits: [.trait(name: "URLRouting", condition: .when(traits: ["URLRouting"]))]
+        ),
         .package(url: "https://github.com/coenttb/swift-url-routing-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.5.6"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
@@ -73,7 +88,7 @@ let package = Package(
                 .domain,
                 .dateParsing,
                 .unixEpochParsing,
-                .urlFormCoding,
+                .formCoding,
                 .tagged
             ]
         ),
