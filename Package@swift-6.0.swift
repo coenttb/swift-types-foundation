@@ -49,7 +49,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-date-parsing", from: "0.1.0"),
+        .package(url: "https://github.com/coenttb/swift-date-parsing", from: "0.5.2"),
         .package(url: "https://github.com/swift-standards/swift-domain-type", from: "0.0.1"),
         .package(url: "https://github.com/swift-standards/swift-emailaddress-type", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-foundation-extensions", from: "0.1.0"),

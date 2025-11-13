@@ -55,7 +55,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-date-parsing", from: "0.1.0"),
+        .package(url: "https://github.com/coenttb/swift-date-parsing", from: "0.5.2"),
         .package(url: "https://github.com/swift-standards/swift-domain-type", from: "0.0.1"),
         .package(url: "https://github.com/swift-standards/swift-emailaddress-type", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-foundation-extensions", from: "0.1.0"),
@@ -102,5 +102,13 @@ let package = Package(
     ],
     swiftLanguageModes: [.v6]
 )
+
+#if swift(>=6.1) && swift(<6.3)
+// Workaround for SPM trait propagation bug in Swift 6.1-6.2
+// Explicitly include transitive conditional dependencies that are not already declared
+package.dependencies.append(contentsOf: [
+    .package(url: "https://github.com/swift-standards/swift-rfc-7578", from: "0.2.1")
+])
+#endif
 
 extension String { var tests: Self { self + " Tests" } }
