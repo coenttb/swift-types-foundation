@@ -54,7 +54,7 @@ let package = Package(
         .package(url: "https://github.com/swift-standards/swift-emailaddress-type", from: "0.3.0"),
         .package(url: "https://github.com/coenttb/swift-foundation-extensions", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-form-coding", from: "0.1.0"),
+        .package(url: "https://github.com/coenttb/swift-form-coding", from: "0.5.0"),
         .package(url: "https://github.com/coenttb/swift-url-routing-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.5.6"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
