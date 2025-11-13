@@ -17,12 +17,10 @@
 @_exported import Tagged
 @_exported import Translating
 @_exported import URLFormCoding
+
+#if !compiler(>=6.1) || URLRouting
 @_exported import URLRouting
 @_exported import URLRoutingTranslating
-
-#if canImport(FoundationNetworking)
-    @_exported import FoundationNetworking
-#endif
 
 extension Tagged where RawValue == Int {
     public static func parser() -> some ParserPrinter<Substring.UTF8View, Self> {
@@ -87,3 +85,8 @@ extension ParserPrinter where Input == URLRequestData {
         return self.baseRequestData(requestData)
     }
 }
+#endif
+
+#if canImport(FoundationNetworking)
+    @_exported import FoundationNetworking
+#endif
