@@ -12,8 +12,8 @@ extension Target.Dependency {
 
 extension Target.Dependency {
     static var builders: Self { .product(name: "Builders", package: "swift-builders") }
-    static var emailAddress: Self { .product(name: "EmailAddress", package: "swift-emailaddress-type") }
-    static var domain: Self { .product(name: "Domain", package: "swift-domain-type") }
+    static var emailAddress: Self { .product(name: "EmailAddress", package: "swift-emailaddress-standard") }
+    static var domain: Self { .product(name: "Domain", package: "swift-domain-standard") }
     static var casePaths: Self { .product(name: "CasePaths", package: "swift-case-paths") }
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
     static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
@@ -56,15 +56,11 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-date-parsing", from: "0.5.2"),
-        .package(url: "https://github.com/swift-standards/swift-domain-type", from: "0.2.0"),
-        .package(url: "https://github.com/swift-standards/swift-emailaddress-type", from: "0.3.0"),
+        .package(url: "https://github.com/swift-standards/swift-domain-standard", from: "0.2.0"),
+        .package(url: "https://github.com/swift-standards/swift-emailaddress-standard", from: "0.3.0"),
         .package(url: "https://github.com/coenttb/swift-foundation-extensions", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
-        .package(
-            url: "https://github.com/coenttb/swift-form-coding",
-            from: "0.1.0",
-            traits: [.trait(name: "URLRouting", condition: .when(traits: ["URLRouting"]))]
-        ),
+        .package(url: "https://github.com/coenttb/swift-form-coding", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-url-routing-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.5.6"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
